@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+layout:decorate="~{layouts/main_layout}">
+	<!-- content -->
+	<!-- content 플래그먼트 -->
+	<th:block layout:fragment="content">
+	<div class="row my-3" id="global-content">
+		<div class="col-10 offset-1">
+			<div class="row align-items-center">
+				<div class="col-auto d-flex align-items-end">
+					<a href="/" class="text-decoration-none">
+						<img src= "/images/logo.png" alt="Project Logo" style="height : 60px; margin-right: 20px;">
+					</a>
+					<a href="/postList" th:class="${activeMenu == 'travel'} ? 'menu-link active-menu' : 'menu-link'">
+	  				 여행
+					</a>
+					<a href="/dishList" th:class="${activeMenu == 'dish'} ? 'menu-link active-menu' : 'menu-link'">
+	  				 맛집
+					</a>
+				</div>
+				<div class="col">
+					<form name="searchForm" id="searchForm" action="dishList" 
+					class="row justify-content-end g-2">
+						<div class="col-auto">
+							<select name="type" class="form-select">
+								<option value="title">제목</option>
+								<option value="writer">작성자</option>
+								<option value="content">내용</option>
+							</select>
+						</div>
+						<div class="col-4">
+							<input type="text" name="keyword" class="form-control"/>
+						</div>
+						<div class="col-auto">
+							<input type="submit" value="검 색" class="btn btn-primary"/>
+						</div>
+					</form>
+				</div>
+			</div> 	
+			<!-- 게시글 리스트 출력 영역 -->
+				<div class="row my-3">
+					<div class="col">
+						<table class="table">
+							<thead>
+								<tr class="table-dark">
+									<th>NO</th>
+									<th>제목</th>
+									<th>작성자</th>
+									<th>작성일</th>
+									<th>조회수</th>
+								</tr>
+							</thead>
+						</table>
+					</div>
+				</div>
+		</div>
+	</div>
+	</th:block>
+</html>
