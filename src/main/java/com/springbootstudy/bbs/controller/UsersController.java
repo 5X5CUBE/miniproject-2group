@@ -127,7 +127,7 @@ public class UsersController {
 	            user.setPhone(mobile1 + "-" + mobile2 + "-" + mobile3);
 	        }
 
-	        String fullAddress = "(" + zipcode + ") " + addr1 + " " + addr2;
+	        String fullAddress =  zipcode + "#" + addr1 + "#" + addr2;
 	        user.setAddress(fullAddress.trim());
 
 	        userService.addUser(user);
