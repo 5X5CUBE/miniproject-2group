@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+	
+	<mapper namespace="com.springbootstudy.bbs.mapper.UserMapper" >
+	
+	<select id="getUserByNickname" resultType="users">
+	    SELECT * 
+	    FROM users 
+	    WHERE nickname = #{nickname}
+	</select>
+	
+	<select id="getUser" resultType="users">
+		SELECT * FROM users WHERE user_id = #{userId}
+	</select>
+	
+	<insert id="addUser" parameterType="users">
+    INSERT INTO users (
+        user_id, username,nickname ,password, address,phone,  gender,  birthdate
+    )
+    VALUES (
+        #{userId}, #{username},#{nickname}, #{password}, #{address},  #{phone},  #{gender}, #{birthdate}
+    )
+	</insert>
+	
+	<select id="getUserById" resultType="users">
+        SELECT * 
+        FROM users 
+        WHERE user_id = #{userId}
+    </select>
+    
+	</mapper>
