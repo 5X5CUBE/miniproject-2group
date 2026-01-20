@@ -1,4 +1,4 @@
-package com.springbootstudy.bbs.controller;
+package com.springbootstudy.app.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.springbootstudy.bbs.domain.Users;
-import com.springbootstudy.bbs.service.UserService;
+import com.springbootstudy.app.domain.Users;
+import com.springbootstudy.app.service.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,6 +32,12 @@ import lombok.extern.slf4j.Slf4j;
 public class UsersController {
 	
 	 private final UserService userService;
+	 
+	 @GetMapping("/userUpdate")
+	 public String updateForm(Model model, HttpSession session) {
+	
+	 return "view/mypage";
+	 }
 	 
 	 @GetMapping("/nickCheck")
 	 @ResponseBody
@@ -52,7 +58,7 @@ public class UsersController {
 
 	 // MemberService 클래스를 사용해 로그인 성공여부 확인
 		 int result = userService.login(id, pass);
-		 if(result == -1) { // 회원 아이디가 존재하지 않으면
+		 if(result == -1) { 
 			 response.setContentType("text/html; charset=utf-8");
 			 PrintWriter out = response.getWriter();
 			 out.println("<script>");
@@ -60,7 +66,7 @@ public class UsersController {
 			 out.println(" history.back();");
 			 out.println("</script>");
 			 return null;
-		 } else if(result == 0) { // 비밀번호가 틀리면
+		 } else if(result == 0) { 
 			 response.setContentType("text/html; charset=utf-8");
 			 PrintWriter out = response.getWriter();
 			 out.println("<script>");
@@ -70,8 +76,10 @@ public class UsersController {
 			 return null;
 		 }
 		 Users user = userService.getMember(id);
-		 session.setAttribute("isLogin", true);
-		 model.addAttribute("user", user);
+		 session.setAttribute("user", user); 
+		 
+		 
+		 //security설정
 		 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
 		            user.getUserId(), 
 		            null, 

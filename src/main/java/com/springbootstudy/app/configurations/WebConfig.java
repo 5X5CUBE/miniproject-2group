@@ -1,4 +1,4 @@
-package com.springbootstudy.bbs.configurations;
+package com.springbootstudy.app.configurations;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

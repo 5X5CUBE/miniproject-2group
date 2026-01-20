@@ -1,4 +1,4 @@
-package com.springbootstudy.bbs.domain;
+package com.springbootstudy.app.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;

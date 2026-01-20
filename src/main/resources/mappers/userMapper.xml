@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 	
-	<mapper namespace="com.springbootstudy.bbs.mapper.UserMapper" >
+	<mapper namespace="com.springbootstudy.app.mapper.UserMapper" >
 	
 	<select id="getUserByNickname" resultType="users">
 	    SELECT * 

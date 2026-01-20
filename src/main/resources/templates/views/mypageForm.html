@@ -68,12 +68,12 @@
                 <!-- 아이디 -->
                 <div class="input-group">
                     <span class="input-group-text justify-content-center" style="width: 120px;">아이디</span>
-                    <input type="text" class="form-control text-center bg-white" value="user_id_sample" readonly>
+                    <input type="text" class="form-control text-center bg-white"  name="id" id="id" th:value="${session.user.userId}"  readonly>
                 </div>
                 <!-- 가입년도 -->
                 <div class="input-group">
                     <span class="input-group-text justify-content-center" style="width: 120px;">가입년도</span>
-                    <input type="text" class="form-control text-center bg-white" value="2023.11.01" readonly>
+                    <input type="text" class="form-control text-center bg-white"  th:value="${#temporals.format(session.user.rdate, 'yyyy-MM-dd')}" readonly>
                 </div>
                 <!-- 추천 수 -->
                 <div class="input-group">
