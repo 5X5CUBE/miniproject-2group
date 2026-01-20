@@ -4,8 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.springbootstudy.app.domain.Users;
-import com.springbootstudy.app.mapper.UserMapper;
+import com.springbootstudy.app.domain.login.Users;
+import com.springbootstudy.app.mapper.login.UserMapper;
 
 @Service
 public class UserService {

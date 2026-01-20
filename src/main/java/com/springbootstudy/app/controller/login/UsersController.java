@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.springbootstudy.app.domain.Users;
+import com.springbootstudy.app.domain.login.Users;
 import com.springbootstudy.app.service.login.UserService;
 
 import jakarta.servlet.ServletException;
