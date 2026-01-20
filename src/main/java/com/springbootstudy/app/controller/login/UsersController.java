@@ -1,4 +1,4 @@
-package com.springbootstudy.app.controller;
+package com.springbootstudy.app.controller.login;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.springbootstudy.app.domain.Users;
-import com.springbootstudy.app.service.UserService;
+import com.springbootstudy.app.service.login.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;

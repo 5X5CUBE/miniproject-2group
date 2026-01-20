@@ -1,4 +1,4 @@
-package com.springbootstudy.app.service;
+package com.springbootstudy.app.service.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
