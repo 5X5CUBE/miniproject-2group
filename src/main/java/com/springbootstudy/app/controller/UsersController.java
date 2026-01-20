@@ -1,4 +1,4 @@
-package com.springbootstudy.app.controller.login;
+package com.springbootstudy.app.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.springbootstudy.app.domain.login.Users;
-import com.springbootstudy.app.service.login.UserService;
+import com.springbootstudy.app.domain.Users;
+import com.springbootstudy.app.service.UserService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletResponse;
@@ -53,7 +53,7 @@ public class UsersController {
 	 }
 	 
 	 @PostMapping("/userlogin")
-	 public String login(Model model, @RequestParam("userId") String id,@RequestParam("password") String pass,HttpSession session, HttpServletResponse response)
+	 public String login(Model model, @RequestParam("loginId") String id,@RequestParam("password") String pass,HttpSession session, HttpServletResponse response)
 	 throws ServletException, IOException {
 
 	 // MemberService 클래스를 사용해 로그인 성공여부 확인
@@ -81,7 +81,7 @@ public class UsersController {
 		 
 		 //security설정
 		 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-		            user.getUserId(), 
+		            user.getLoginId(), 
 		            null, 
 		            List.of(new SimpleGrantedAuthority("ROLE_USER")));
 
@@ -104,11 +104,11 @@ public class UsersController {
 	 // AJAX 요청을 받는 메서드임시
 	    @GetMapping("/idCheck")
 	    @ResponseBody
-	    public boolean idCheck(@RequestParam("userId") String userId) {
+	    public boolean idCheck(@RequestParam("loginId") String loginId) {
 	        
-	        boolean result = userService.checkId(userId);
+	        boolean result = userService.checkId(loginId);
 	        
-	        System.out.println("아이디 중복 체크 요청: " + userId + " / 결과: " + result); 
+	        System.out.println("아이디 중복 체크 요청: " + loginId + " / 결과: " + result); 
 	        
 	        return result; 
 	    }

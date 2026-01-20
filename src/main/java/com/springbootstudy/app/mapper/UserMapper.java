@@ -1,8 +1,8 @@
-package com.springbootstudy.app.mapper.login;
+package com.springbootstudy.app.mapper;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.springbootstudy.app.domain.login.Users;
+import com.springbootstudy.app.domain.Users;
 
 @Mapper
 public interface UserMapper {
@@ -13,5 +13,5 @@ public interface UserMapper {
 	
 	public void addUser(Users user);
 	
-	Users getUserById(String userId); 
+	Users getUserById(String loginId); 
 }

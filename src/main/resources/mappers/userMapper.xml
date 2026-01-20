@@ -11,22 +11,22 @@
 	</select>
 	
 	<select id="getUser" resultType="users">
-		SELECT * FROM users WHERE user_id = #{userId}
+		SELECT * FROM users WHERE login_id = #{loginId}
 	</select>
 	
 	<insert id="addUser" parameterType="users">
     INSERT INTO users (
-        user_id, username,nickname ,password, address,phone,  gender,  birthdate
+        login_id, username,nickname ,password, address,phone,  gender,  birthdate
     )
     VALUES (
-        #{userId}, #{username},#{nickname}, #{password}, #{address},  #{phone},  #{gender}, #{birthdate}
+        #{loginId}, #{username},#{nickname}, #{password}, #{address},  #{phone},  #{gender}, #{birthdate}
     )
 	</insert>
 	
 	<select id="getUserById" resultType="users">
         SELECT * 
         FROM users 
-        WHERE user_id = #{userId}
+        WHERE login_id = #{loginId}
     </select>
     
 	</mapper>

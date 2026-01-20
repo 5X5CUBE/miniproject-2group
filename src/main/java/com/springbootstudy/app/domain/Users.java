@@ -1,4 +1,4 @@
-package com.springbootstudy.app.domain.login;
+package com.springbootstudy.app.domain;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,7 +13,8 @@ import lombok.Setter;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Users {
-	private String userId;
+	private Long userId;
+	private String loginId;
 	private String username;
 	private LocalDate birthdate;
 	private LocalDateTime rdate;

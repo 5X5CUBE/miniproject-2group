@@ -68,7 +68,7 @@
                 <!-- 아이디 -->
                 <div class="input-group">
                     <span class="input-group-text justify-content-center" style="width: 120px;">아이디</span>
-                    <input type="text" class="form-control text-center bg-white"  name="id" id="id" th:value="${session.user.userId}"  readonly>
+                    <input type="text" class="form-control text-center bg-white"  name="id" id="id" th:value="${session.user.loginId}"  readonly>
                 </div>
                 <!-- 가입년도 -->
                 <div class="input-group">
@@ -137,7 +137,7 @@
             <h5 class="fw-bold mb-0">내가 쓴 글</h5>
             
             <form action="/mypost" method="get">
-			    <input type="hidden" name="userId" value="user123">
+			    <input type="hidden" name="loginId" value="user123">
 			    <button type="submit" class="btn btn-outline-secondary btn-sm">게시글 자세히 보기</button>
 			</form>
             

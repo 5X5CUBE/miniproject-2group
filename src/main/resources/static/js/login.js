@@ -4,11 +4,11 @@
 $(function() {
 
 	$("#loginForm").submit(function() {
-		var id = $("#userId").val();
+		var id = $("#loginId").val();
 		var pass = $("#password").val();
 		if(id.length <= 0) {
 			alert("아이디가 입력되지 않았습니다.\n아이디를 입력해주세요");
-			$("#userId").focus();
+			$("#loginId").focus();
 			return false;
 		}
 		if(pass.length <= 0) {

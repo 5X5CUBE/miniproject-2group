@@ -36,16 +36,16 @@ $(function() {
 	
 	
 	$("#btnIdCheck").on("click", function() {
-	        var id = $("#userId").val();
+	        var id = $("#loginId").val();
 	        
 	        if(id.length == 0) {
 	            alert("아이디를 입력해주세요.");
-	            $("#userId").focus();
+	            $("#loginId").focus();
 	            return;
 	        }
 	        if(id.length < 5) {
 	            alert("아이디는 5자 이상이어야 합니다.");
-	            $("#userId").focus();
+	            $("#loginId").focus();
 	            return;
 	        }
 
@@ -53,7 +53,7 @@ $(function() {
 	        $.ajax({
 	            url: "/idCheck",       
 	            type: "GET",           
-	            data: {"userId": id},  
+	            data: {"loginId": id},  
 	            dataType: "json",
 	            success: function(isAvailable) {
 
@@ -63,7 +63,7 @@ $(function() {
 	                } else {
 	                    alert("이미 사용 중인 아이디입니다.");
 	                    $("#isIdCheck").val("false");
-	                    $("#userId").focus();
+	                    $("#loginId").focus();
 	                }
 	            },
 	            error: function() {
@@ -114,7 +114,7 @@ $(function() {
 
         var name = $("#username").val();
 		var nickname = $("#nickname").val();    
-        var id = $("#userId").val();         
+        var id = $("#loginId").val();         
         var pass1 = $("#pass1").val();      
         var pass2 = $("#pass2").val();      
 
@@ -126,7 +126,7 @@ $(function() {
 
         if(id.length == 0) {
             alert("아이디가 입력되지 않았습니다.\n아이디를 입력해주세요");
-            $("#userId").focus();
+            $("#loginId").focus();
             return false;
         }
         
