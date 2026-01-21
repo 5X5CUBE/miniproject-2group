@@ -33,6 +33,9 @@ public class UsersController {
 	
 	 private final UserService userService;
 	 
+	 
+	 
+	 
 	 @GetMapping("/userUpdate")
 	 public String updateForm(Model model, HttpSession session) {
 	
@@ -53,46 +56,28 @@ public class UsersController {
 	 }
 	 
 	 @PostMapping("/userlogin")
-	 public String login(Model model, @RequestParam("loginId") String id,@RequestParam("password") String pass,HttpSession session, HttpServletResponse response)
+	 @ResponseBody
+	 public int login(Model model, @RequestParam("loginId") String id,@RequestParam("password") String pass,HttpSession session, HttpServletResponse response)
 	 throws ServletException, IOException {
 
 	 // MemberService 클래스를 사용해 로그인 성공여부 확인
 		 int result = userService.login(id, pass);
-		 if(result == -1) { 
-			 response.setContentType("text/html; charset=utf-8");
-			 PrintWriter out = response.getWriter();
-			 out.println("<script>");
-			 out.println(" alert('존재하지 않는 아이디 입니다.');");
-			 out.println(" history.back();");
-			 out.println("</script>");
-			 return null;
-		 } else if(result == 0) { 
-			 response.setContentType("text/html; charset=utf-8");
-			 PrintWriter out = response.getWriter();
-			 out.println("<script>");
-			 out.println(" alert('비밀번호가 다릅니다.');");
-			 out.println(" location.href='loginForm'");
-			 out.println("</script>");
-			 return null;
-		 }
-		 Users user = userService.getMember(id);
-		 session.setAttribute("user", user); 
-		 
-		 
-		 //security설정
-		 UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
-		            user.getLoginId(), 
-		            null, 
-		            List.of(new SimpleGrantedAuthority("ROLE_USER")));
+		 System.out.println("컨트롤러 로그인 결과: " + result);
+		 if (result == 1) {
+		        Users user = userService.getMember(id);
+		        session.setAttribute("isLogin", true);
+		        session.setAttribute("user", user);
 
-		    
-		    SecurityContext context = SecurityContextHolder.createEmptyContext();
-		    context.setAuthentication(token);
-		    
-		    SecurityContextHolder.setContext(context);
-
-		    session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
-		 return "redirect:/mainhome";
+		        // 시큐리티 연동
+		        UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(
+		                user.getLoginId(), null, List.of(new SimpleGrantedAuthority("ROLE_USER")));
+		        SecurityContext context = SecurityContextHolder.createEmptyContext();
+		        context.setAuthentication(token);
+		        SecurityContextHolder.setContext(context);
+		        session.setAttribute(HttpSessionSecurityContextRepository.SPRING_SECURITY_CONTEXT_KEY, context);
+		    }
+		
+		 return result; 
 	 }
 	 
 	 @Autowired

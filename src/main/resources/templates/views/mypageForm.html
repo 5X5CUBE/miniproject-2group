@@ -7,6 +7,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
   <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+  <script th:src="@{js/mypage.js}"></script>
   <style>
     /* 기본 스타일 유지 */
     .imgsq {
@@ -121,11 +122,11 @@
         <!-- 오른쪽: 주소 -->
         <div class="col-6">
              <div class="input-group mb-2">
-                <input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호" readonly name="zipcode" th:value="${session.user.zipcode}">
+                <input type="text"  class="form-control" placeholder="우편번호" readonly name="zipcode" th:value="${session.user.zipcode}">
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addModal" >주소 변경</button>
             </div>
-            <input type="text" id="sample6_address" class="form-control mb-2" placeholder="주소" readonly name="addr1"   th:value="${session.user.addr1}">
-            <input type="text" id="sample6_detailAddress" class="form-control" placeholder="상세주소" readonly name="addr2"   th:value="${session.user.addr2}">
+            <input type="text"  class="form-control mb-2" placeholder="주소" readonly name="addr1"   th:value="${session.user.addr1}">
+            <input type="text"  class="form-control" placeholder="상세주소" readonly name="addr2"   th:value="${session.user.addr2}">
         </div>
       </div>
 
@@ -183,16 +184,18 @@
 	        <h1 class="modal-title fs-5" id="staticBackdropLabel">닉네임 변경</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <div class="modal-body">
-	      	<div class="input-group">
-			    <input type="text" class="form-control" placeholder="닉네임 입력">
-			    <button type="button" class="btn btn-secondary">중복확인</button>
-			</div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
-	      </div>
+	      <form action="userNicknameUpdate" name="userNicknameUpdate" method="post" id="userNicknameUpdate">
+		      <div class="modal-body">
+		      	<div class="input-group">
+				    <input type="text" class="form-control" placeholder="닉네임 입력">
+				    <button type="button" class="btn btn-secondary" id="btnIdCheck">중복확인</button>
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
+		      </div>
+		    </form>
 	    </div>
 	  </div>
 	</div>
@@ -204,36 +207,38 @@
 	        <h1 class="modal-title fs-5" id="staticBackdropLabel">휴대폰 변경</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
+	      <form action="userPhoneUpdate" name="userPhoneUpdate" method="post" id="userPhoneUpdate">
 	      <div class="modal-body">
-	      	 <div class="mb-3">
-                 <div class="row g-2 align-items-center">
-                     <div class="col-3">
-                         <select class="form-select text-center" name="mobile1" id="mobile1">
-                             <option>010</option>
-                             <option>011</option>
-                             <option>016</option>
-                             <option>017</option>
-                         </select>
-                     </div>
-                     <div class="col-auto">
-                         <span class="fw-bold">-</span>
-                     </div>
-                     <div class="col">
-                         <input type="text" class="form-control text-center" name="mobile2" maxlength="4">
-                     </div>
-                     <div class="col-auto">
-                         <span class="fw-bold">-</span>
-                     </div>
-                     <div class="col">
-                         <input type="text" class="form-control text-center" name="mobile3" maxlength="4">
-                     </div>
-                 </div>
-               </div>
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
-	      </div>
+		      	 <div class="mb-3">
+	                 <div class="row g-2 align-items-center">
+	                     <div class="col-3">
+	                         <select class="form-select text-center" name="mobile1" id="mobile1">
+	                             <option>010</option>
+	                             <option>011</option>
+	                             <option>016</option>
+	                             <option>017</option>
+	                         </select>
+	                     </div>
+	                     <div class="col-auto">
+	                         <span class="fw-bold">-</span>
+	                     </div>
+	                     <div class="col">
+	                         <input type="text" class="form-control text-center" name="mobile2" maxlength="4">
+	                     </div>
+	                     <div class="col-auto">
+	                         <span class="fw-bold">-</span>
+	                     </div>
+	                     <div class="col">
+	                         <input type="text" class="form-control text-center" name="mobile3" maxlength="4">
+	                     </div>
+	                 </div>
+	               </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
+		      </div>
+	      </form>
 	    </div>
 	  </div>
 	</div>
@@ -245,15 +250,17 @@
 	        <h1 class="modal-title fs-5" id="staticBackdropLabel">비밀번호 변경</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <div class="modal-body">
-				<input type="text" class="form-control mb-3" placeholder="기존비밀번호를 입력해주세요">
-				<input type="text" class="form-control mb-3" placeholder="변경할 비밀번호를 입력해주세요">
-				<input type="text" class="form-control mb-3" placeholder="변경할 비밀번호를 다시한번 입력해주세요">
-	      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
-	      </div>
+	      <form action="userPassUpdate" name="userPassUpdate" method="post" id="userPassUpdate">
+		      <div class="modal-body">
+					<input type="text" class="form-control mb-3" placeholder="기존비밀번호를 입력해주세요" id="pass" name="pass">
+					<input type="text" class="form-control mb-3" placeholder="변경할 비밀번호를 입력해주세요" id="pass1" name="pass1">
+					<input type="text" class="form-control mb-3" placeholder="변경할 비밀번호를 다시한번 입력해주세요" id="pass2" name="pass2">
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >수정 확인</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
+		      </div>
+	      </form>
 	    </div>
 	  </div>
 	</div>
@@ -265,28 +272,30 @@
 	        <h1 class="modal-title fs-5" id="staticBackdropLabel">주소 변경</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <div class="modal-body">
-	        <div class="input-group mb-2">
-	            <input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호" readonly>
-	            <button type="button" class="btn btn-outline-secondary" onclick="sample6_execDaumPostcode()">
-	                우편번호 찾기
-	            </button>
-	        </div>
-	        <div class="mb-2">
-	            <input type="text" id="sample6_address" class="form-control" placeholder="기본 주소" readonly>
-	        </div>
+	      <form action="userPhoneUpdate" name="userPhoneUpdate" method="post" id="userPhoneUpdate">
+		      <div class="modal-body">
+		        <div class="input-group mb-2">
+		            <input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호" readonly>
+		            <button type="button" class="btn btn-outline-secondary" onclick="sample6_execDaumPostcode()">
+		                우편번호 찾기
+		            </button>
+		        </div>
+		        <div class="mb-2">
+		            <input type="text" id="sample6_address" class="form-control" placeholder="기본 주소" readonly>
+		        </div>
+		
+		        <div class="row g-2">
+		            <div class="col-12">
+		                <input type="text" id="sample6_detailAddress" class="form-control" placeholder="상세 주소를 입력하세요">
+		            </div>
+		        </div>
 	
-	        <div class="row g-2">
-	            <div class="col-12">
-	                <input type="text" id="sample6_detailAddress" class="form-control" placeholder="상세 주소를 입력하세요">
-	            </div>
-	        </div>
-
-      </div>
-	      <div class="modal-footer">
-	        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
-	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
 	      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
+		      </div>
+		    </form>
 	    </div>
 	  </div>
 	</div>
