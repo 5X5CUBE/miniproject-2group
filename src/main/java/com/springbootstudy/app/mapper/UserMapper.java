@@ -7,6 +7,14 @@ import com.springbootstudy.app.domain.Users;
 @Mapper
 public interface UserMapper {
 	
+	void updatePhone(Users user);
+	
+	void updatePassword(Users user);
+	
+	void updateAddress(Users user);
+	
+	void updateNickname(Users user);
+	
 	Users getUserByNickname(String nickname);
 	
 	public Users getUser(String id);

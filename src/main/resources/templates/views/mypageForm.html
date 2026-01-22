@@ -100,14 +100,14 @@
         <div class="col-6">
             <div class="mb-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" th:value="${session.user.nickname}" readonly>
+                    <input type="text" class="form-control" th:value="${session.user.nickname}" readonly id="displayNickname">
                     <button class="btn btn-outline-success btn-fixed" type="button" data-bs-toggle="modal" data-bs-target="#nicknameModal" >닉네임 변경</button>
 
                 </div>
             </div>
             <div class="mb-2">
                 <div class="input-group">
-                    <input type="text" class="form-control" th:value="${session.user.phone}" readonly>
+                    <input type="text" class="form-control" th:value="${session.user.phone}" readonly  id="displayPhone">
                     <button class="btn btn-outline-success btn-fixed" type="button" data-bs-toggle="modal" data-bs-target="#phoneModal" >연락처 변경</button>
                 </div>
             </div>
@@ -122,11 +122,11 @@
         <!-- 오른쪽: 주소 -->
         <div class="col-6">
              <div class="input-group mb-2">
-                <input type="text"  class="form-control" placeholder="우편번호" readonly name="zipcode" th:value="${session.user.zipcode}">
+                <input type="text"  class="form-control" placeholder="우편번호" readonly name="zipcode" th:value="${session.user.zipcode}" id="displayZipcode">
                 <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addModal" >주소 변경</button>
             </div>
-            <input type="text"  class="form-control mb-2" placeholder="주소" readonly name="addr1"   th:value="${session.user.addr1}">
-            <input type="text"  class="form-control" placeholder="상세주소" readonly name="addr2"   th:value="${session.user.addr2}">
+            <input type="text"  class="form-control mb-2" placeholder="주소" readonly name="addr1"   th:value="${session.user.addr1}" id="displayAddr1">
+            <input type="text"  class="form-control" placeholder="상세주소" readonly name="addr2"   th:value="${session.user.addr2}" id="displayAddr2">
         </div>
       </div>
 
@@ -184,15 +184,16 @@
 	        <h1 class="modal-title fs-5" id="staticBackdropLabel">닉네임 변경</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <form action="userNicknameUpdate" name="userNicknameUpdate" method="post" id="userNicknameUpdate">
+	      <form id="userNicknameUpdateForm">
 		      <div class="modal-body">
 		      	<div class="input-group">
-				    <input type="text" class="form-control" placeholder="닉네임 입력">
-				    <button type="button" class="btn btn-secondary" id="btnIdCheck">중복확인</button>
+				    <input type="text" class="form-control" placeholder="닉네임 입력"  id="newNickname"  name="nickname">
+				    <button type="button" class="btn btn-secondary" id="btnNickCheckInModal">중복확인</button>
 				</div>
+				<input type="hidden" id="isNickUpdateCheck" value="false">
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
+		        <button type="button" class="btn btn-primary" id="btnSubmitNickname">수정 확인</button>
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
 		      </div>
 		    </form>
@@ -207,12 +208,12 @@
 	        <h1 class="modal-title fs-5" id="staticBackdropLabel">휴대폰 변경</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <form action="userPhoneUpdate" name="userPhoneUpdate" method="post" id="userPhoneUpdate">
+	      <form id="userPhoneUpdateForm">
 	      <div class="modal-body">
 		      	 <div class="mb-3">
 	                 <div class="row g-2 align-items-center">
 	                     <div class="col-3">
-	                         <select class="form-select text-center" name="mobile1" id="mobile1">
+	                         <select class="form-select text-center" id="newMobile1">
 	                             <option>010</option>
 	                             <option>011</option>
 	                             <option>016</option>
@@ -223,19 +224,19 @@
 	                         <span class="fw-bold">-</span>
 	                     </div>
 	                     <div class="col">
-	                         <input type="text" class="form-control text-center" name="mobile2" maxlength="4">
+	                         <input type="text" class="form-control text-center" id="newMobile2" maxlength="4">
 	                     </div>
 	                     <div class="col-auto">
 	                         <span class="fw-bold">-</span>
 	                     </div>
 	                     <div class="col">
-	                         <input type="text" class="form-control text-center" name="mobile3" maxlength="4">
+	                         <input type="text" class="form-control text-center" id="newMobile3" maxlength="4">
 	                     </div>
 	                 </div>
 	               </div>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
+		        <button type="button" class="btn btn-primary" id="btnSubmitPhone">수정 확인</button>
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
 		      </div>
 	      </form>
@@ -247,17 +248,17 @@
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
-	        <h1 class="modal-title fs-5" id="staticBackdropLabel">비밀번호 변경</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        <h1 class="modal-title fs-5" >비밀번호 변경</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
 	      </div>
-	      <form action="userPassUpdate" name="userPassUpdate" method="post" id="userPassUpdate">
+	      <form id="userPassUpdateForm">
 		      <div class="modal-body">
-					<input type="text" class="form-control mb-3" placeholder="기존비밀번호를 입력해주세요" id="pass" name="pass">
-					<input type="text" class="form-control mb-3" placeholder="변경할 비밀번호를 입력해주세요" id="pass1" name="pass1">
-					<input type="text" class="form-control mb-3" placeholder="변경할 비밀번호를 다시한번 입력해주세요" id="pass2" name="pass2">
+					<input type="text" class="form-control mb-3" placeholder="기존비밀번호를 입력해주세요" id="currentPass">
+					<input type="text" class="form-control mb-3" placeholder="변경할 비밀번호를 입력해주세요" id="newPass1">
+					<input type="text" class="form-control mb-3" placeholder="변경할 비밀번호를 다시한번 입력해주세요" id="newPass2">
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal" >수정 확인</button>
+		        <button type="button" class="btn btn-primary" id="btnSubmitPass" >수정 확인</button>
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
 		      </div>
 	      </form>
@@ -270,29 +271,29 @@
 	    <div class="modal-content">
 	      <div class="modal-header">
 	        <h1 class="modal-title fs-5" id="staticBackdropLabel">주소 변경</h1>
-	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" ></button>
 	      </div>
-	      <form action="userPhoneUpdate" name="userPhoneUpdate" method="post" id="userPhoneUpdate">
+	      <form id="userAddressUpdateForm">
 		      <div class="modal-body">
 		        <div class="input-group mb-2">
-		            <input type="text" id="sample6_postcode" class="form-control" placeholder="우편번호" readonly>
-		            <button type="button" class="btn btn-outline-secondary" onclick="sample6_execDaumPostcode()">
+		            <input type="text" id="newZipcode" class="form-control" placeholder="우편번호" readonly>
+		            <button type="button" class="btn btn-outline-secondary" onclick="execDaumPostcodeForUpdate()">
 		                우편번호 찾기
 		            </button>
 		        </div>
 		        <div class="mb-2">
-		            <input type="text" id="sample6_address" class="form-control" placeholder="기본 주소" readonly>
+		            <input type="text"  id="newAddr1" class="form-control" placeholder="기본 주소" readonly>
 		        </div>
 		
 		        <div class="row g-2">
 		            <div class="col-12">
-		                <input type="text" id="sample6_detailAddress" class="form-control" placeholder="상세 주소를 입력하세요">
+		                <input type="text"  id="newAddr2" class="form-control" placeholder="상세 주소">
 		            </div>
 		        </div>
 	
 	      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" data-bs-dismiss="modal">수정 확인</button>
+		        <button type="button" class="btn btn-primary" id="btnSubmitAddress">수정 확인</button>
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">수정 취소</button>
 		      </div>
 		    </form>

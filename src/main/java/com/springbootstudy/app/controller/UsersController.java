@@ -9,6 +9,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -33,7 +34,82 @@ public class UsersController {
 	
 	 private final UserService userService;
 	 
+	 private final PasswordEncoder passwordEncoder;
 	 
+	 @Autowired
+	    public UsersController(UserService userService, PasswordEncoder passwordEncoder) {
+	        this.userService = userService;
+	        this.passwordEncoder = passwordEncoder;
+	    }
+	 
+	 @PostMapping("/userPhoneUpdate")
+	 @ResponseBody
+	 public String userPhoneUpdate(@RequestParam("phone") String phone, HttpSession session) {
+	     Users user = (Users) session.getAttribute("user");
+	     if(user == null) return "fail";
+	     
+	     user.setPhone(phone);
+	     userService.updatePhone(user);
+	     session.setAttribute("user", user); 
+	     return "success";
+	 }
+
+	 
+	 @PostMapping("/userPassUpdate")
+	 @ResponseBody
+	 public String userPassUpdate(@RequestParam("currentPass") String currentPass,
+	                              @RequestParam("newPass") String newPass,
+	                              HttpSession session) {
+	     Users user = (Users) session.getAttribute("user");
+	     if(user == null) return "fail";
+
+	     if(!passwordEncoder.matches(currentPass, user.getPassword())) {
+	         return "wrong"; 
+	     }
+
+	     user.setPassword(passwordEncoder.encode(newPass));
+	     userService.updatePassword(user);
+	     
+	     return "success";
+	 }
+
+	 @PostMapping("/userAddressUpdate")
+	 @ResponseBody
+	 public String userAddressUpdate(@RequestParam("zipcode") String zipcode,
+	                                 @RequestParam("addr1") String addr1,
+	                                 @RequestParam("addr2") String addr2,
+	                                 HttpSession session) {
+	     Users user = (Users) session.getAttribute("user");
+	     if(user == null) return "fail";
+	     
+	     String fullAddress = zipcode + "#" + addr1 + "#" + addr2;
+	     
+	     user.setAddress(fullAddress);
+	     userService.updateAddress(user);
+	     session.setAttribute("user", user); 
+	     return "success";
+	 }
+	 
+	 
+	 @PostMapping("/userNicknameUpdate")
+	 @ResponseBody
+	 public String userNicknameUpdate(@RequestParam("nickname") String nickname, HttpSession session) {
+	     
+	     Users user = (Users) session.getAttribute("user");
+	     
+	     if (user != null) {
+	         
+	         user.setNickname(nickname);
+	         userService.updateNickname(user); 
+	         
+	         
+	         session.setAttribute("user", user);
+	         
+	         return "success";
+	     }
+	     
+	     return "fail";
+	 }
 	 
 	 
 	 @GetMapping("/userUpdate")
@@ -80,10 +156,7 @@ public class UsersController {
 		 return result; 
 	 }
 	 
-	 @Autowired
-	    public UsersController(UserService userService) {
-	        this.userService = userService;
-	    }
+	 
 	 
 	 
 	 // AJAX 요청을 받는 메서드임시

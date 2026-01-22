@@ -16,6 +16,22 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	public void updatePhone(Users user) {
+	    userMapper.updatePhone(user);
+	}
+
+	public void updatePassword(Users user) {
+	    userMapper.updatePassword(user);
+	}
+
+	public void updateAddress(Users user) {
+	    userMapper.updateAddress(user);
+	}
+	
+	public void updateNickname(Users user) {
+	    userMapper.updateNickname(user);
+	}
+	
 	public boolean checkNickname(String nickname) {
 	    Users user = userMapper.getUserByNickname(nickname);
 	    return user == null; 
