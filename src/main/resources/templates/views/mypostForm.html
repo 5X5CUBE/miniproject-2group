@@ -45,13 +45,13 @@
 
                     <!-- 2. 오른쪽: 검색 및 필터 컨트롤 -->
                     <div class="col-9">
-                        <form action="/search" method="get"> <!-- 검색 폼 시작 -->
+                        <form action="/search" method="get">
                             <div class="d-flex flex-column gap-2">
                                 
-                                <!-- 닉네임 (읽기 전용) -->
+                                <!-- 닉네임 -->
                                 <div class="input-group">
                                     <span class="input-group-text justify-content-center bg-white" style="width: 100px;">닉네임</span>
-                                    <input type="text" class="form-control bg-white" value="" readonly>
+                                    <input type="text" class="form-control bg-white text-center" th:value="${session.user.nickname}" readonly>
                                 </div>
 
                                 <!-- 검색 필터 (한 줄로 배치) -->
@@ -62,7 +62,7 @@
                                         <option value="comment">댓글</option>
                                     </select>
 
-                                    <!-- ???? 채움: 검색 기준 -->
+                                    <!--  검색 기준 -->
                                     <span class="input-group-text justify-content-center" style="width: 100px;">검색 기준</span>
                                     <select class="form-select" name="field">
                                         <option value="title">제목</option>
@@ -80,7 +80,6 @@
                     </div>
                 </div>
             </div>
-            <!-- // 상단 영역 끝 -->
 
             <!-- 중간 영역: 결과 정보 및 정렬 -->
             <div class="d-flex justify-content-between align-items-end mb-2">
@@ -90,16 +89,16 @@
                     <span>전체 게시글</span> 
                     <span class="text-primary">x</span>건
                 </div>
-
+				<div>"~~~~~~~~"의 검색결과</div>
                 <!-- 정렬 옵션 (오른쪽 정렬) -->
                 <div class="input-group" style="width: 300px;">
-                    <!-- ???? 채움: 정렬 순서 -->
+                    <!-- 정렬 순서 -->
                     <span class="input-group-text bg-white border-0"><small>정렬 순서</small></span>
                     <select class="form-select form-select-sm" onchange="location.href=this.value">
-                        <option value="?sort=date_desc">작성일 최신순</option>
-                        <option value="?sort=date_asc">작성일 오래된순</option>
-                        <option value="?sort=like_desc">추천수 높은순</option>
-                        <option value="?sort=view_desc">조회수 높은순</option>
+                        <option value="?sort=date_desc"  th:selected="${param.sort == null or param.sort[0] == 'date_desc'}">작성일 최신순</option>
+                        <option value="?sort=date_asc" th:selected="${param.sort == null or param.sort[0] == 'date_asc'}">작성일 오래된순</option>
+                        <option value="?sort=like_desc" th:selected="${param.sort == null or param.sort[0] == 'like_desc'}">추천수 높은순</option>
+                        <option value="?sort=view_desc" th:selected="${param.sort == null or param.sort[0] == 'view_desc'}">조회수 높은순</option>
                     </select>
                 </div>
             </div>
@@ -143,6 +142,5 @@
         </div>
     </div>
 </div>
-
 </body>
 </html>
