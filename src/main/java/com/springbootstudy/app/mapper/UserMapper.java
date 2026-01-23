@@ -7,6 +7,8 @@ import com.springbootstudy.app.domain.Users;
 @Mapper
 public interface UserMapper {
 	
+	void deleteUser(String loginId);
+	
 	void updatePhone(Users user);
 	
 	void updatePassword(Users user);

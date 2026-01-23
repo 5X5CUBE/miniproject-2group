@@ -16,6 +16,10 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	public void deleteUser(String loginId) {
+	    userMapper.deleteUser(loginId);
+	}
+	
 	public void updatePhone(Users user) {
 	    userMapper.updatePhone(user);
 	}

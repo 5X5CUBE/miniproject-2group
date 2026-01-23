@@ -36,6 +36,22 @@ public class UsersController {
 	 
 	 private final PasswordEncoder passwordEncoder;
 	 
+	 @PostMapping("/userDelete")
+	 @ResponseBody
+	 public String userDelete(@RequestParam("password") String password, HttpSession session) {
+	     Users user = (Users) session.getAttribute("user");
+	     if(user == null) return "fail";
+
+	     if(!passwordEncoder.matches(password, user.getPassword())) {
+	         return "wrong"; 
+	     }
+
+	     userService.deleteUser(user.getLoginId());
+	     session.invalidate(); 
+
+	     return "success";
+	 }
+	 
 	 @Autowired
 	    public UsersController(UserService userService, PasswordEncoder passwordEncoder) {
 	        this.userService = userService;

@@ -301,7 +301,7 @@
 	  </div>
 	</div>
 	
-		<div class="modal fade" id="userDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	<div class="modal fade" id="userDeleteModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
 	  <div class="modal-dialog">
 	    <div class="modal-content">
 	      <div class="modal-header">
@@ -309,12 +309,12 @@
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
 	      <div class="modal-body">
-				<input type="text" class="form-control mb-3" placeholder="비밀번호를 입력해주세요">
-				<h6>회원탈퇴를 입력해주세요</h6>
-				<input type="text" class="form-control mb-3" placeholder="회원탈퇴를 입력해주세요">
+				<input type="text" class="form-control mb-3" id="deletePass" placeholder="비밀번호를 입력해주세요">
+				<h6>"회원탈퇴"를 입력해주세요</h6>
+				<input type="text" class="form-control mb-3" id="deleteConfirmText" placeholder="회원탈퇴를 입력해주세요">
 	      </div>
 	      <div class="modal-footer">
-	        <button type="button" class="btn btn-danger " data-bs-dismiss="modal">탈퇴 하기</button>
+	        <button type="button" class="btn btn-danger " id="btnDeleteAction">탈퇴 하기</button>
 	        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">탈최 취소</button>
 	      </div>
 	    </div>

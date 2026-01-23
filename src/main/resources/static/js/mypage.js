@@ -5,6 +5,50 @@
 
 $(function() {
 	
+	
+	$(document).on("click", "#btnDeleteAction", function() {
+	    var password = $("#deletePass").val();
+	    var confirmText = $("#deleteConfirmText").val().trim(); 
+
+	    if(!password) {
+	        alert("비밀번호를 입력해주세요.");
+	        $("#deletePass").focus();
+	        return;
+	    }
+	    
+	    if(confirmText !== "회원탈퇴") {
+	        alert("'회원탈퇴' 문구를 정확히 입력해주세요.");
+	        $("#deleteConfirmText").focus();
+	        return;
+	    }
+
+	    if(!confirm("정말로 탈퇴하시겠습니까?\n삭제된 데이터는 복구할 수 없습니다.")) {
+	        return;
+	    }
+
+	    $.ajax({
+	        url: "/userDelete",
+	        type: "POST",
+	        data: { "password": password },
+	        success: function(result) {
+	            if(result === "success") {
+	                alert("탈퇴가 완료되었습니다.\n이용해주셔서 감사합니다.");
+	                location.href = "/userLogout"; 
+	            } else if(result === "wrong") {
+	                alert("비밀번호가 일치하지 않습니다.");
+	                $("#deletePass").val(""); 
+	                $("#deletePass").focus();
+	            } else {
+	                alert("탈퇴 처리에 실패했습니다.");
+	            }
+	        },
+	        error: function() {
+	            alert("서버 통신 에러");
+	        }
+	    });
+	});
+	
+	
 	$("#btnSubmitPhone").off("click").on("click", function() {
 	    var m1 = $("#newMobile1").val();
 	    var m2 = $("#newMobile2").val();

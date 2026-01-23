@@ -4,6 +4,10 @@
 	
 	<mapper namespace="com.springbootstudy.app.mapper.UserMapper" >
 	
+	<delete id="deleteUser">
+	    DELETE FROM users WHERE login_id = #{loginId}
+	</delete>
+	
 	<update id="updatePhone" parameterType="com.springbootstudy.app.domain.Users">
 	    UPDATE users SET phone = #{phone} WHERE login_id = #{loginId}
 	</update>
