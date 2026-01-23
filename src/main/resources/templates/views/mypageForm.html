@@ -121,15 +121,24 @@
 
         <!-- 오른쪽: 주소 -->
         <div class="col-6">
-             <div class="input-group mb-2">
-                <input type="text"  class="form-control" placeholder="우편번호" readonly name="zipcode" th:value="${session.user.zipcode}" id="displayZipcode">
-                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addModal" >주소 변경</button>
-            </div>
-            <input type="text"  class="form-control mb-2" placeholder="주소" readonly name="addr1"   th:value="${session.user.addr1}" id="displayAddr1">
-            <input type="text"  class="form-control" placeholder="상세주소" readonly name="addr2"   th:value="${session.user.addr2}" id="displayAddr2">
-        </div>
-      </div>
-
+        	<th:block th:if="${session.user.addr1 != null and session.user.addr1 != ''}">
+	             <div class="input-group mb-2">
+	                <input type="text"  class="form-control" placeholder="우편번호" readonly name="zipcode" th:value="${session.user.zipcode}" id="displayZipcode">
+	                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addModal" >주소 변경</button>
+	            </div>
+	            <input type="text"  class="form-control mb-2" placeholder="주소" readonly name="addr1"   th:value="${session.user.addr1}" id="displayAddr1">
+	            <input type="text"  class="form-control" placeholder="상세주소" readonly name="addr2"   th:value="${session.user.addr2}" id="displayAddr2">
+		</th:block>
+		<th:block th:unless="${session.user.addr1 != null and session.user.addr1 != ''}">
+	             <div class="input-group mb-2">
+	                <input type="text"  class="form-control" placeholder="우편번호" readonly name="zipcode" id="displayZipcode">
+	                <button class="btn btn-outline-secondary" type="button" data-bs-toggle="modal" data-bs-target="#addModal" >주소 변경</button>
+	            </div>
+	            <input type="text"  class="form-control mb-2" placeholder="주소" readonly name="addr1"   id="displayAddr1">
+	            <input type="text"  class="form-control" placeholder="상세주소" readonly name="addr2"    id="displayAddr2">     
+		</th:block>
+		</div>
+		</div>
       <hr>
 
       <!-- 3. 게시글 영역 (테이블로 변경) -->
