@@ -26,7 +26,7 @@ public class SecurityConfig {
 		http.csrf(csrf -> csrf.disable());
 		
 			http.authorizeHttpRequests(auth -> 
-			auth.requestMatchers("/mainhome", "/usersjoin", "/login","/css/**","/js/**","/images/**","/idCheck","/nickCheck","/userlogin","/joinResult" ).permitAll()
+			auth.requestMatchers("/mainhome", "/usersjoin", "/login","/css/**","/js/**","/images/**","/idCheck","/nickCheck","/userlogin","/joinResult" ,"/findId","/checkUserForReset","/resetPassword").permitAll()
 			.anyRequest().authenticated());
 			http.formLogin(form -> form
 		            .loginPage("/login").permitAll());

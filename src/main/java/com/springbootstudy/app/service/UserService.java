@@ -16,6 +16,18 @@ public class UserService {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 	
+	public boolean checkUserByPhone(String loginId, String phone) {
+	    return userMapper.checkUserByPhone(loginId, phone) > 0; 
+	}
+
+	public void resetPassword(String loginId, String password) {
+	    userMapper.resetPassword(loginId, password); 
+	}
+	
+	public String findLoginId(String username, String phone) {
+	    return userMapper.findLoginId(username, phone);
+	}
+	
 	public void deleteUser(String loginId) {
 	    userMapper.deleteUser(loginId);
 	}

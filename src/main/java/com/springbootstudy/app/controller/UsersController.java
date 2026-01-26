@@ -36,6 +36,56 @@ public class UsersController {
 	 
 	 private final PasswordEncoder passwordEncoder;
 	 
+	 @PostMapping("/checkUserForReset")
+	 @ResponseBody
+	 public String checkUserForReset(@RequestParam("loginId") String loginId, 
+	                                 @RequestParam("phone") String phone,
+	                                 HttpSession session) {
+		 
+	     boolean exists = userService.checkUserByPhone(loginId, phone);
+	     
+	     if(exists) {
+
+	         session.setAttribute("resetTargetId", loginId);
+	         session.setMaxInactiveInterval(180); 
+	         return "success";
+	     }
+	     return "fail";
+	 }
+
+	 @PostMapping("/resetPassword")
+	 @ResponseBody
+	 public String resetPassword(@RequestParam("password") String password, HttpSession session) {
+
+	     String loginId = (String) session.getAttribute("resetTargetId");
+	     
+	     if(loginId == null) {
+	         return "fail"; 
+	     }
+	     
+	     userService.resetPassword(loginId, passwordEncoder.encode(password));
+	     
+	     session.removeAttribute("resetTargetId");
+	     
+	     return "success";
+	 }
+	 
+	 
+	 @PostMapping("/findId")
+	 @ResponseBody
+	 public String findId(@RequestParam("username") String username, 
+	                      @RequestParam("phone") String phone) {
+	     
+	     String loginId = userService.findLoginId(username, phone);
+	     
+	     if(loginId == null) {
+	         return "fail"; 
+	     }
+	     
+	     return loginId; 
+	 }
+	 
+	 
 	 @PostMapping("/userDelete")
 	 @ResponseBody
 	 public String userDelete(@RequestParam("password") String password, HttpSession session) {

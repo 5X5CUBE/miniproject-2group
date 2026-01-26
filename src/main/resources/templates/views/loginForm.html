@@ -60,8 +60,8 @@
     }
 
     /* 입력창 포커스 효과 */
-    .form-control {
-        height: 50px; /* 입력창을 조금 더 높게 */
+    .form-control ,.form-select{
+        height: 50px; 
         border-radius: 5px;
     }
     .form-control:focus {
@@ -99,6 +99,10 @@
         color: #2E7D32;
         font-weight: bold;
     }
+    .form-select:focus {
+        border-color: #2E7D32;
+        box-shadow: 0 0 0 0.25rem rgba(46, 125, 50, 0.25);
+    }
   </style>
 </head>
 <body>
@@ -132,7 +136,7 @@
                     <div class="d-flex justify-content-between link-group">
                         <a href="/usersjoin">회원가입</a>
                         <a href="#idSearchModal" data-bs-toggle="modal" >아이디 찾기</a>
-                        <a href="#">비밀번호 찾기</a>
+                        <a href="#passSearchModal" data-bs-toggle="modal" >비밀번호 찾기</a>
                     </div>
                 </form>
 
@@ -152,7 +156,6 @@
 	        <h1 class="modal-title fs-5" id="staticBackdropLabel">아이디 찾기</h1>
 	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 	      </div>
-	      <form id="idSearchForm">
 	      <div class="modal-body">
 		      	 <div class="mb-3">
 		      	 <h3 class="modal-title fs-6 mb-2" id="staticBackdropLabel">이름 입력</h3>
@@ -185,13 +188,88 @@
 	               </div>
 		      </div>
 		      <div class="modal-footer">
-		        <button type="button" class="btn btn-primary" id="btnSubmitPhone">아이디 찾기</button>
+		        <button type="button" class="btn btn-primary" id="btnFindId">아이디 찾기</button>
 		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
 		      </div>
-	      </form>
 	    </div>
 	  </div>
 	</div>
+	
+	<div class="modal fade" id="passSearchModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="staticBackdropLabel">비밀번호 찾기</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+		      	 <div class="mb-3">
+		      	 <h3 class="modal-title fs-6 mb-2" id="staticBackdropLabel">아이디 입력</h3>
+		      	 <div class="mb-3">
+		      	 	 <input type="text" class="form-control"  id="searchPassId">
+		      	 </div>
+		      	 <h3 class="modal-title fs-6 mb-2" id="staticBackdropLabel">전화번호 입력</h3>
+	                 <div class="row g-2 align-items-center">
+	                     <div class="col-3">
+	                         <select class="form-select text-center" id="searchPassMobile1">
+	                             <option>010</option>
+	                             <option>011</option>
+	                             <option>016</option>
+	                             <option>017</option>
+	                         </select>
+	                     </div>
+	                     <div class="col-auto">
+	                         <span class="fw-bold">-</span>
+	                     </div>
+	                     <div class="col">
+	                         <input type="text" class="form-control text-center" id="searchPassMobile2" maxlength="4">
+	                     </div>
+	                     <div class="col-auto">
+	                         <span class="fw-bold">-</span>
+	                     </div>
+	                     <div class="col">
+	                         <input type="text" class="form-control text-center" id="searchPassMobile3" maxlength="4">
+	                     </div>
+	                 </div>
+	               </div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" id="btnCheckUser">확인</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
+	<div class="modal fade" id="passChangeModal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <h1 class="modal-title fs-5" id="staticBackdropLabel">비밀번호 재설정</h1>
+	        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+	      </div>
+	      <div class="modal-body">
+		      	 <div class="mb-3">
+		      	 <h3 class="modal-title fs-6 mb-2" id="staticBackdropLabel">비밀번호 변경</h3>
+		      	 <div class="mb-3">
+		      	 	 <input type="password" class="form-control" id="newResetPass1">
+		      	 </div>
+		      	 <h3 class="modal-title fs-6 mb-2" id="staticBackdropLabel">비밀번호 재입력</h3>
+	              <div class="mb-3">
+		      	 		<input type="password" class="form-control" id="newResetPass2">
+		      	 </div>   
+	             </div>
+		     </div>
+		      <div class="modal-footer">
+		        <button type="button" class="btn btn-primary" id="btnRunResetPass">변경 확인</button>
+		        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+		      </div>
+	    </div>
+	  </div>
+	</div>
+	
+	
 
 </body>
 </html>
